@@ -24,7 +24,7 @@ const getRandomIngredient = () => {
 const recipePromise = fetchApiData('https://what-s-cookin-starter-kit.herokuapp.com/api/v1/recipes')
 const userPromise = fetchApiData('https://what-s-cookin-starter-kit.herokuapp.com/api/v1/users');
 const ingredientPromise = fetchApiData('https://what-s-cookin-starter-kit.herokuapp.com/api/v1/ingredients');
-// let pantry;
+let pantry;
 let ourUser;
 let thisRecipe;
 let thisIngredient;
@@ -49,7 +49,6 @@ Promise.all([userPromise, ingredientPromise, recipePromise])
    
 
 // QuerySelectors
-const favoriteButton = document.querySelector('#favorite-button');
 const cookbookButton = document.querySelector('#cookbook-button')
 const userGreeting = document.querySelector("#userName");
 const recipeImage = document.querySelector('.card-image')
@@ -64,24 +63,28 @@ const ingredientCardWrapper = document.querySelector('.ingredient-card-wrapper')
 const searchBox = document.querySelector('.search-box');
 const searchButton = document.querySelector('.search-submit');
 const pantryWrapper = document.querySelector('.pantry-wrapper');
+const submitButton = document.querySelector('.submit-button')
+const inputIngredient = document.querySelector('.input-ingredient')
+const inputAmount = document.querySelector('.amount-input')
+// let incrementButton = document.querySelector('.increment')
 
-
+// EventListeners
 const addToCookbookButtonEventHandler = (buttons) => {
     recipeRepo = new RecipeRepository(recipes, ingredients);
     buttons.forEach((button) => {
         button.addEventListener('click', (event) => {
             let recipeToAdd = recipeRepo.allRecipes.find(recipe => recipe.id === parseInt(event.target.id))
-            console.log(recipeToAdd)
             ourUser.addRecipesToCook(recipeToAdd);
         })
     })
 }
-// EventListeners
 
 goHomeButton.addEventListener('click', showAllRecipes)
 cookbookButton.addEventListener('click', showCookbookRecipes)
 searchButton.addEventListener('click', searchRecipe)
-pantryButton.addEventListener('click', showPantry)
+// pantryButton.addEventListener('click', showPantry)
+// submitButton.addEventListener('click', addIngredientToPantry)
+
 
 function showAllHelper() {
     let letsMakeIt = document.querySelectorAll(".lets-make-it-button")
@@ -91,6 +94,7 @@ function showAllHelper() {
         })
     })
 }
+
 function showAllRecipes() {
     recipeRepo = new RecipeRepository(recipes, ingredients);
     const allRecipes = recipeRepo.createAllRecipes(thisIngredient)
@@ -243,22 +247,61 @@ function displayRecipeBySearchResults(recipes) {
     showAllHelper()
 }
 
+// function showPantry() {
+//     console.log(thisRecipe.requiredIngredients);
+//     let options = [{name: "soup"},{name: "chips"}, {name: "goodluck"}].map((option) =>{
+//        return `<option value=${ option.name }> ${ option.name } </option>`
+//     })
+//     pantry = new Pantry(ourUser.pantry)
+//     pantry.attachNameToId(ingredientsData)
+//     pantryWrapper.innerHTML = `<h2> ${ourUser.name.split(" ")[0]}'s Pantry </h2>
+//     <form>
+//         <label for="pantry"> Add new ingredient </label>
+//         <select id="pantry" name="pantry" class="input-ingredient">
+//            ${options}
+//         </select>
+//         <label for="addIngredient"> Add ingredient amount: </label>
+//         <input class="amount-input" id="addIngredient" type="number" value="1"> </input>
+//         <br><br>
+//         <button class="submit-button" type="submit"> Submit </button> 
+//     </form>
+//     `
+//     pantry.ingredients.forEach((item) => {
+//         pantryWrapper.innerHTML += `<div class="ingredients">
+//         <div class="amount-wrapper">
+//         <p> ${item.name}: </p>
+//         <p> ${item.amount} </p>
+//         </div>
+//         </div>`
+//     })
+//     hide(recipeCardWrapper)
+// };
+
+function addIngredientToPantry(event) {
+    event.preventDefault()
+    let newIngredient = inputIngredient.value;
+    let newAmount = inputAmount.value
+
+/*
+called when submit form is clicked.
+we need to know what ingredient and how much
+
+*/
+}
 
 
-function showPantry() {
-    let pantry = new Pantry(ourUser.pantry)
-    pantry.attachNameToId(ingredientsData)
-    pantryWrapper.innerHTML = `<h2> ${ourUser.name.split(" ")[0]}'s Pantry </h2>`
-    pantry.ingredients.forEach((item) => {
-        pantryWrapper.innerHTML += `<div class="ingredients">
-        <ul> 
-        <p> name: ${item.name} </p>
-        <p> amount: ${item.amount} </p>
-        </ul>
-        </div>`
-    })
-    hide(recipeCardWrapper)
-};
+/* Add the incrementor button WHERE?
+if in showPantry function, will I have to add forEach eventlistner
+if in html, how would I connect each set of incrementor buttons
+
+once added, how will post work?
+
+add buttons to page
+attach each inputs to amount in users pantry for each item
+
+make function that ++ the pantry amount
+
+*/
 
 function show(element) {
     element.classList.remove('hidden');

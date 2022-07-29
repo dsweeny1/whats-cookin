@@ -1,6 +1,6 @@
 
 export default class Pantry {
-    constructor(pantryIngredients, recipeData) {
+    constructor(pantryIngredients) {
         this.ingredients = pantryIngredients
         this.missingIngredients = []
     }
