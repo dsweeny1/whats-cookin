@@ -21,11 +21,7 @@ const getRandomIngredient = () => {
 }
 
 // Global Variables
-<<<<<<< HEAD
-const recipePromise = fetchApiData('http://localhost:3001/api/v1/recipes');
-=======
 const recipePromise = fetchApiData('http://localhost:3001/api/v1/recipes')
->>>>>>> d56b27fd67aaa2502d59f386c6ea7c6404252be4
 const userPromise = fetchApiData('http://localhost:3001/api/v1/users');
 const ingredientPromise = fetchApiData('http://localhost:3001/api/v1/ingredients');
 let ourUser;
@@ -44,7 +40,6 @@ Promise.all([userPromise, ingredientPromise, recipePromise])
         const users = value[0]
         const ingredientsCall = value[1]
         const recipeCall = value[2]
-        console.log(users[0])
         ourUser = setUserData(users[getRandomUserId()])
         userAttribute(ourUser)
         thisIngredient = setIngredientData(ingredientsCall[getRandomIngredient()])
@@ -55,7 +50,7 @@ Promise.all([userPromise, ingredientPromise, recipePromise])
         pantry.attachNameToId(ingredients)
         showAllRecipes();
     })
-    .
+
     // throw current error
     // catch error
 
@@ -186,13 +181,8 @@ const letsMakeItTrafficCop = () => {
         showPantry()
     } else {
         pantry.removeIngredients()
-<<<<<<< HEAD
-    const enjoyMealMessage = document.querySelector('.enjoy-meal-message')
-    enjoyMealMessage.innerText = 'Enjoy Your Meal!'
-=======
       const enjoyMealMessage = document.querySelector('.enjoy-meal-message')
       enjoyMealMessage.innerText = 'Enjoy Your Meal!'
->>>>>>> d56b27fd67aaa2502d59f386c6ea7c6404252be4
     }
 }
 
@@ -294,10 +284,6 @@ function displayRecipeBySearchResults(recipes) {
     showAllHelper()
 }
 
-<<<<<<< HEAD
-
-
-=======
 function showPantry(thisRecipe) {
     // we're definitely going to have to match ingredient id's so that it knows which ingredient in the pantry to update
     console.log(pantry.missingIngredients)
@@ -331,18 +317,37 @@ function showPantry(thisRecipe) {
     show(pantryWrapper)
 };
 
-function addIngredientToPantry(event) {
-    event.preventDefault()
-    let newIngredient = inputIngredient.value;
-    let newAmount = inputAmount.value
->>>>>>> d56b27fd67aaa2502d59f386c6ea7c6404252be4
+// function addIngredientToPantry(event) {
+//     event.preventDefault()
+//     let newIngredient = inputIngredient.value;
+//     let newAmount = inputAmount.value
+// }
+
+
+// let increasedPantry = { userID: `${ourUser.id}`, ingredientID: `${newIngredient}`, ingredientModification: `${newAmount}` }
+
+// function postApiData(url, increasedPantry) {
+//     fetch('http://localhost:3001/api/v1/users', {
+//         method: 'POST', 
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify(increasedPantry)
+//     }).then(data => data.json()).then(data => {
+//         console.log(data)
+//         fetch(url)
+//             .then(data => data.json())
+//             .then(data => console.log(data))
+//     })
+//         .catch(error => console.log(error));
+// }
+
+// How and where is a fetch post supposed to be set up?
+// Do we invoke in a new function for?
 
 /*
 called when submit form is clicked.
 we need to know what ingredient and how much
-
 */
-}
+
 
 
 
